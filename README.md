@@ -1,6 +1,6 @@
 # PROJECT TITLE: Autonomous Agentic SIEM & Incident Responder for Distributed Infrastructure
-**Date:** June 30, 2026 | **Author/Lead:** Security Engineering Intern | [cite_start]**Status:** V1 Deployed [cite: 29]
-[cite_start]**Project Links:** [https://github.com/kushalram0712/autonomous-siem](https://github.com/kushalram0712/autonomous-siem) [cite: 30]
+**Date:** June 30, 2026 | **Author/Lead:** Bezawada Kushal Ram / Intern | [cite_start]**Status:** Completed [cite: 29]
+[cite_start]**Project Links:** [https://github.com/kushalram0712/Autonomous-Agentic-SIEM-Incident-Responder](https://github.com/kushalram0712/Autonomous-Agentic-SIEM-Incident-Responder) [cite: 30]
 
 ---
 
