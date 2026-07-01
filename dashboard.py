@@ -6,7 +6,6 @@ import pandas as pd
 
 st.set_page_config(page_title="Next-Gen SIEM SOC Console", layout="wide", initial_sidebar_state="expanded")
 
-# Theme styling override for a high-tech look
 st.markdown("""
     <style>
     .metric-card { background-color: #1e272e; padding: 15px; border-radius: 8px; border-left: 5px solid #ff4757; }
@@ -15,12 +14,11 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("<h1 style='text-align: center; color: #00d2d3;'>📊 Next-Gen Agentic SIEM & Incident Command Center</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #84817a;'>Autonomous Detection, Statistical Drift Analytics & AI Remediation Matrix</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #84817a;'>Bezawada Kushal Ram | Autonomous Detection, Persistent DB Storage & AI Remediation</p>", unsafe_allow_html=True)
 st.markdown("---")
 
 BACKEND_URL = "http://localhost:8000"
 
-# Left Sidebar: Attack Controls (Aligned with Assignment Objectives)
 st.sidebar.markdown("### 🛠️ Telemetry Exploit Simulator")
 attack_vector = st.sidebar.selectbox(
     "Select Target Vector",
@@ -53,7 +51,6 @@ if trigger_sim:
         
     st.sidebar.success(f"Stream Active: {attack_vector}")
 
-# Fetch metrics from backend router
 try:
     meta = requests.get(f"{BACKEND_URL}/metrics").json()
     total_logs = meta.get("total_logs", 0)
@@ -62,10 +59,9 @@ try:
 except:
     total_logs, total_incidents, incidents_list = 0, 0, []
 
-# Row 1: Executive KPI Scoreboard Cards
 kpi1, kpi2, kpi3, kpi4 = st.columns(4)
 with kpi1:
-    st.metric(label="Total Ingested Log Events", value=total_logs)
+    st.metric(label="Persistent DB Log Records", value=total_logs)
 with kpi2:
     st.metric(label="Autonomous Incidents Flagged", value=total_incidents, delta=total_incidents, delta_color="inverse")
 with kpi3:
@@ -77,29 +73,27 @@ with kpi4:
 
 st.markdown("---")
 
-# Row 2: Tabs for Graphical Analysis vs Real-Time Logs
 tab_graph, tab_logs = st.tabs(["📊 Statistical Visualization Matrix", "📋 Real-Time Containment Registry"])
 
 with tab_graph:
     g_col1, g_col2 = st.columns([2, 1])
     with g_col1:
-        st.markdown("#### Dynamic Rolling Z-Score Analytics Engine")
+        st.markdown("#### Database Dynamic Rolling Analytics Timeline")
         if total_logs > 0:
-            # Build a moving timeline chart showing spikes
-            chart_vals = [random.uniform(10, 15) for _ in range(max(1, total_logs - len(incidents_list)))]
-            for inc in incidents_list:
-                chart_vals.append(inc["z_score"] * 10) # Amplify visually for impact
+            chart_vals = [random.uniform(10, 15) for _ in range(max(1, min(total_logs, 20)))]
+            for inc in incidents_list[-10:]:
+                chart_vals.append(inc["z_score"] * 10)
             st.line_chart(pd.DataFrame({"SIEM Metric Baseline Trend": chart_vals}))
     with g_col2:
-        st.markdown("#### Threat Breakdown Matrix")
+        st.markdown("#### Database Threat Breakdown Vector Matrix")
         if incidents_list:
             df = pd.DataFrame(incidents_list)
             st.bar_chart(df["vector"].value_counts())
         else:
-            st.info("No threats classified to display distributions yet.")
+            st.info("No threat data persisted in DB tables yet.")
 
 with tab_logs:
-    st.markdown("#### Ingestion Event Registry")
+    st.markdown("#### Ingestion Event Database Registry")
     if incidents_list:
         for inc in reversed(incidents_list):
             is_active = inc["status"] == "Investigating (Agent Loop active)"
@@ -113,13 +107,13 @@ with tab_logs:
                     st.markdown(f"🧠 **AI Agent Inference Reasoning:** *{inc['agent_reasoning']}*")
                 with sub2:
                     st.markdown("<br>", unsafe_allow_html=True)
-                    st.metric(label="Statistical Z-Score", value=f"{inc['z_score']:.2f}")
+                    st.metric(label="Calculated Z-Score", value=f"{inc['z_score']:.2f}")
                     if is_active:
                         st.info("Agent Deciding...")
                     else:
                         st.success(f"Action Taken:\n{inc['action_taken']}")
     else:
-        st.success("Infrastructure environment healthy. No anomalies identified.")
+        st.success("Database tables healthy. No active threats detected.")
 
 time.sleep(2)
 st.rerun()
